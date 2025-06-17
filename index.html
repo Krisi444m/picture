@@ -89,20 +89,64 @@ is_mdel3(X).
 
     // Разширена база знания с животни и правила
     const knowledge = `
-     model(model1).
-     model(model2).
-     model(model3).
-     model(model4).
-     model(model5).
-     model(model6).
+     % Име, Националност, Рождена година, Активни години, Агенция
 
-     is_model(X) :- model(X).
+модел(жизел_бюндхен, бразилия, 1980, 1997, viva_models).
+модел(наоми_кембъл, великобритания, 1970, 1986, dna_models).
+модел(клаудия_шифър, германия, 1970, 1987, elite_models).
+модел(кейт_мос, великобритания, 1974, 1988, storm_models).
+модел(бела_хадид, сащ, 1996, 2014, img_models).
+модел(жиджи_хадид, сащ, 1995, 2013, img_models).
+модел(адриана_лима, бразилия, 1981, 1999, elite_models).
+модел(ирина_шейк, русия, 1986, 2007, img_models).
+модел(карла_бранчини, франция, 1967, 1985, elite_models).
+модел(карли_клос, сащ, 1992, 2006, img_models).
+% С коя модна къща е работила
+работила_за(жизел_бюндхен, chanel).
+работила_за(наоми_кембъл, versace).
+работила_за(клаудия_шифър, dolce_gabbana).
+работила_за(кейt_мос, calvin_klein).
+работила_за(адриана_лима, victoria_secret).
+работила_за(бела_хадид, dior).
+работила_за(жиджи_хадид, tommy_hilfiger).
+работила_за(ирина_шейк, armani).
+
+% Супермодел ли е (да/не)
+супермодел(жизел_бюндхен, да).
+супермодел(наоми_кембъл, да).
+супермодел(клаудия_шифър, да).
+супермодел(кейt_мос, да).
+супермодел(бела_хадид, не).
+супермодел(жиджи_хадид, не).
+% супермоделите са модели със стойност "да" в съответния факт
+е_супермодел(Име) :- супермодел(Име, да).
+
+% модел, работил за дадена модна къща
+работил_с_модна_къща(Име, МоднаКъща) :- работила_за(Име, МоднаКъща).
+
+% модел, роден след дадена година
+роден_след(Име, Година) :-
+    модел(Име, _, ГодинаРаждане, _, _),
+    ГодинаРаждане > Година.
+
+% модел от дадена държава
+модел_от(Име, Държава) :-
+    модел(Име, Държава, _, _, _).
+
+% модел с агенция X
+модел_с_агенция(Име, Агенция) :-
+    модел(Име, _, _, _, Агенция).
+
+% активен модел след определена година
+активен_след(Име, Година) :-
+    модел(Име, _, _, ГодинаНачало, _),
+    ГодинаНачало >= Година.
     `;
 
     session.consult(knowledge);
 
     const animalAnimations = {
-      model1: '<img src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExdjByY3QwMWF3eWl6YWpnaXgzcGx4MDQwaXB6eXYzMGVkbnI1a2MyaCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/5AtHzs3lLbbWg/giphy.gif" />',
+      жизел_бюндхен: '<img src="https://webnews.bg/uploads/images/59/1759/51759/orig.gif?_=1446840682" />',
       model2: '<img src="https://media.giphy.com/media/3o85xlNEi98hnqPBRK/giphy.gif?cid=ecf05e47nbj12rco6xjygxf6iaqq4deatedmrl2kbsyobsjj&ep=v1_gifs_related&rid=giphy.gif&ct=g" />',
       model3: '<img src="https://media.giphy.com/media/26tn8w5rBnrCeECOI/giphy.gif?cid=ecf05e47nbj12rco6xjygxf6iaqq4deatedmrl2kbsyobsjj&ep=v1_gifs_related&rid=giphy.gif&ct=g" />',
       model4: '<img src="https://media.giphy.com/media/Bpj2bDZTwEGNULp1oG/giphy.gif?cid=ecf05e47k45ntdhih85omz82sah9trs278sst691rjaui2gm&ep=v1_gifs_related&rid=giphy.gif&ct=g" />',
