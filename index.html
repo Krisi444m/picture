@@ -1,10 +1,9 @@
-
 <!DOCTYPE html>
 <html lang="bg">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Prolog животни с различни правила и GIF</title>
+  <title>Prolog Модели с GIF</title>
   <style>
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -68,18 +67,11 @@
   </style>
 </head>
 <body>
-  
 
-  <h1>Prolog Модели с различни правила и GIF</h1>
+  <h1>Prolog Модели с GIF</h1>
 
   <textarea id="prolog-input">
-% Примери на заявки:
 is_supermodel(Name).
-model_from(Name, usa).
-born_after(Name, 1990).
-model_with_agency(Name, img_models).
-worked_with_brand(Name, dior).
-
   </textarea><br />
   <button onclick="runProlog()">Изпълни</button>
 
@@ -90,10 +82,7 @@ worked_with_brand(Name, dior).
   <script>
     const session = pl.create();
 
-    // Разширена база знания с животни и правила
     const knowledge = `
-    % name, nationality, birth year, career start year, agency
-
 model(gisele_bundchen, brazil, 1980, 1997, viva_models).
 model(naomi_campbell, uk, 1970, 1986, dna_models).
 model(claudia_schiffer, germany, 1970, 1987, elite_models).
@@ -105,7 +94,6 @@ model(irina_shayk, russia, 1986, 2007, img_models).
 model(karla_bruni, france, 1967, 1985, elite_models).
 model(karlie_kloss, usa, 1992, 2006, img_models).
 
-% which fashion house the model has worked for
 worked_for(gisele_bundchen, chanel).
 worked_for(naomi_campbell, versace).
 worked_for(claudia_schiffer, dolce_gabbana).
@@ -115,7 +103,6 @@ worked_for(bella_hadid, dior).
 worked_for(gigi_hadid, tommy_hilfiger).
 worked_for(irina_shayk, armani).
 
-% is supermodel? (yes/no)
 supermodel(gisele_bundchen, yes).
 supermodel(naomi_campbell, yes).
 supermodel(claudia_schiffer, yes).
@@ -123,41 +110,21 @@ supermodel(kate_moss, yes).
 supermodel(bella_hadid, no).
 supermodel(gigi_hadid, no).
 
-% a supermodel is one whose supermodel fact is 'yes'
 is_supermodel(Name) :- supermodel(Name, yes).
-
-% a model who has worked for a fashion house
 worked_with_brand(Name, Brand) :- worked_for(Name, Brand).
-
-% a model born after a certain year
-born_after(Name, Year) :-
-    model(Name, _, BirthYear, _, _),
-    BirthYear > Year.
-
-% a model from a certain country
-model_from(Name, Country) :-
-    model(Name, Country, _, _, _).
-
-% a model with a specific agency
-model_with_agency(Name, Agency) :-
-    model(Name, _, _, _, Agency).
-
-% a model who started after a certain year
-active_after(Name, Year) :-
-    model(Name, _, _, StartYear, _),
-    StartYear >= Year.
-
-    `;
+born_after(Name, Year) :- model(Name, _, BirthYear, _, _), BirthYear > Year.
+model_from(Name, Country) :- model(Name, Country, _, _, _).
+model_with_agency(Name, Agency) :- model(Name, _, _, _, Agency).
+active_after(Name, Year) :- model(Name, _, _, StartYear, _), StartYear >= Year.
+`;
 
     session.consult(knowledge);
 
     const animalAnimations = {
-      gisele_bundchen: '<img src="https://images.ecency.com/p/FUkUE5bzkAZT3HzV5tJDiU2ik81PCd4JCyhWnRcDN8XJsVFY3UNB8DCcF6FBnrG9mHUsoB7296D4omrF75j3S9mNdXjzd7j2xiKroEuvcf5umt9qDsRKoeDp3kBezDQscLbJuZaCqh8sgthRd5GukLgMiH16xWrcxhxh.png?format=match&mode=fit" class="animal-gif" alt="Лъв анимация" />',
-      elephant: '<img src="https://media.giphy.com/media/2v170e71aanfi/giphy.gif" class="animal-gif" alt="Слон анимация" />',
-      tiger: '<img src="https://media.giphy.com/media/fANhQpcPGr2hO/giphy.gif" class="animal-gif" alt="Тигър анимация" />',
-      crocodile: '<img src="https://media.giphy.com/media/vFKqnCdLPNOKc/giphy.gif" class="animal-gif" alt="Крокодил анимация" />',
-      kangaroo: '<img src="https://media.giphy.com/media/l0MYEw7nYdf6r62aI/giphy.gif" class="animal-gif" alt="Кенгуру анимация" />',
-      owl: '<img src="https://media.giphy.com/media/3ohs4B9Zz54HXGvoYs/giphy.gif" class="animal-gif" alt="Бухал анимация" />'
+      gisele_bundchen: '<img src="https://images.ecency.com/p/FUkUE5bzkAZT3HzV5tJDiU2ik81PCd4JCyhWnRcDN8XJsVFY3UNB8DCcF6FBnrG9mHUsoB7296D4omrF75j3S9mNdXjzd7j2xiKroEuvcf5umt9qDsRKoeDp3kBezDQscLbJuZaCqh8sgthRd5GukLgMiH16xWrcxhxh.png?format=match&mode=fit" class="animal-gif" alt="Gisele Bundchen" />',
+      naomi_campbell: '<img src="https://media.giphy.com/media/3o7TKw1VJE6AvQ7CBK/giphy.gif" class="animal-gif" alt="Naomi" />',
+      claudia_schiffer: '<img src="https://media.giphy.com/media/l3vR85PnGsBwu1PFK/giphy.gif" class="animal-gif" alt="Claudia" />',
+      kate_moss: '<img src="https://media.giphy.com/media/3oz8xP3Blv9yVJgW4k/giphy.gif" class="animal-gif" alt="Kate Moss" />'
     };
 
     function runProlog() {
@@ -170,24 +137,22 @@ active_after(Name, Year) :-
 
       session.query(input);
       session.answers(answer => {
-        if(answer === false) {
-          resultDiv.innerHTML += `<p>Няма повече резултати.</p>`;
+        if (answer === false) {
+          resultDiv.innerHTML += "<p>Няма повече резултати.</p>";
           return;
         }
+
         const str = pl.format_answer(answer);
-        if (str === "false.") {
-          resultDiv.innerHTML = "<p>Няма резултати за тази заявка.</p>";
-          return;
-        }
         resultDiv.innerHTML += `<p>${str}</p>`;
 
-        const match = str.match(/X = (\w+)/);
+        // Извличане на първата стойност от отговора (без значение името на променливата)
+        const match = str.match(/=\s*([a-zA-Z0-9_]+)/);
         if (match) {
-          const animal = match[1];
-          if (animalAnimations[animal]) {
-            animDiv.innerHTML = animalAnimations[animal];
+          const value = match[1];
+          if (animalAnimations[value]) {
+            animDiv.innerHTML = animalAnimations[value];
           } else {
-            animDiv.innerHTML = "<p>Няма GIF за това животно.</p>";
+            animDiv.innerHTML = "<p>Няма GIF за този модел.</p>";
           }
         }
       });
