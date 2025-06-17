@@ -124,13 +124,13 @@ active_after(Name, Year) :- model(Name, _, _, StartYear, _), StartYear >= Year.
       gisele_bundchen: '<img src="https://accounts.termwiki.com/images/thumb.png?f=gisele+bundchen-5-1343291955.jpg" class="animal-gif" alt="Gisele" />',
       naomi_campbell: '<img src="https://media.vogue.fr/photos/5cb89574b4fdaebe726cd888/2:3/w_2560%2Cc_limit/NaomiCampbell-TiffanyAmber-vogueint-10apr19-RexFeatures.jpg" class="animal-gif" alt="Naomi" />',
       claudia_schiffer: '<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRydyCE4J96C5ayhs42iQ-V-NSqWWKidnis_g&s" class="animal-gif" alt="Claudia" />',
-      kate_moss: '<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/11_-_Kate_Moss-001_%2816510685424%29.jpg/250px-11_-_Kate_Moss-001_%2816510685424%29.jpg" alt="Kate Moss" />'
+      kate_moss: '<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/11_-_Kate_Moss-001_%2816510685424%29.jpg/250px-11_-_Kate_Moss-001_%2816510685424%29.jpg" class="animal-gif" alt="Kate Moss" />',
       bella_hadid: '<img src="https://ca-times.brightspotcdn.com/dims4/default/452664e/2147483647/strip/true/crop/2436x3250+0+0/resize/1200x1601!/quality/75/?url=https%3A%2F%2Fcalifornia-times-brightspot.s3.amazonaws.com%2F72%2Fe4%2F78952b6041aa8938f172310687b1%2F2022-golden-heart-awards-36336.jpg" class="animal-gif" alt="Bella" />',
       gigi_hadid: '<img src="https://upload.wikimedia.org/wikipedia/commons/f/f9/Gigi_Hadid_for_Rabanne.png" class="animal-gif" alt="Gigi" />',
       adriana_lima: '<img src="https://i.pinimg.com/564x/3e/63/40/3e634064f267e355659d0eb6e7d28c61.jpg" class="animal-gif" alt="Adriana" />',
       irina_shayk: '<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS87kCdulumnxPGjVxXYbX6AYI6yxU_ygbagA&s" class="animal-gif" alt="Irina" />',
       karla_bruni: '<img src="https://upload.wikimedia.org/wikipedia/commons/1/1e/Carla_Cannes_2021.jpg" class="animal-gif" alt="Karla" />',
-      karlie_kloss: '<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/Karlie_Kloss_%2847541292642%29_%28cropped%29_%28cropped%29.jpg/1200px-Karlie_Kloss_%2847541292642%29_%28cropped%29_%28cropped%29.jpg" alt="Karlie" />',
+      karlie_kloss: '<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/Karlie_Kloss_%2847541292642%29_%28cropped%29_%28cropped%29.jpg/1200px-Karlie_Kloss_%2847541292642%29_%28cropped%29_%28cropped%29.jpg" class="animal-gif" alt="Karlie" />'
     };
 
     function runProlog() {
@@ -151,7 +151,6 @@ active_after(Name, Year) :- model(Name, _, _, StartYear, _), StartYear >= Year.
         const str = pl.format_answer(answer);
         resultDiv.innerHTML += `<p>${str}</p>`;
 
-        // Извличане на първата стойност от отговора (без значение името на променливата)
         const match = str.match(/=\s*([a-zA-Z0-9_]+)/);
         if (match) {
           const value = match[1];
@@ -167,3 +166,4 @@ active_after(Name, Year) :- model(Name, _, _, StartYear, _), StartYear >= Year.
 
 </body>
 </html>
+
